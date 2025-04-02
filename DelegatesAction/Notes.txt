@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Ping</title>
+</head>
+<body>
+    <button id="pingButton">Ping</button>
+    <script>
+        // Establish WebSocket connection to the server
+        const socket = new WebSocket("ws://localhost:8080");
+
+        // Log when connection is established
+        socket.onopen = function() {
+            console.log("Connected to server");
+        };
+
+        // Log received messages
+        socket.onmessage = function(event) {
+            console.log("Received: " + event.data);
+        };
+
+        // Log when connection is closed
+        socket.onclose = function() {
+            console.log("Disconnected from server");
+        };
+
+        // Send "ping" when button is clicked
+        document.getElementById("pingButton").addEventListener("click", function() {
+            socket.send("ping");
+        });
+    </script>
+</body>
+</html>
